@@ -167,6 +167,7 @@ function render() {
         </header>
         ${app.activeModuleId === 'dashboard' ? renderDashboard() : app.activeModuleId === 'pops' ? renderPopsPage() : app.activeModuleId === 'orders' ? renderOrdersPage() : renderModule(activeModule)}
       </main>
+      ${renderMobileNav()}
     </div>
   `;
   bindEvents();
@@ -195,6 +196,17 @@ function renderSidebar() {
         }).join('')}
       </nav>
     </aside>
+  `;
+}
+
+function renderMobileNav() {
+  return `
+    <nav class="mobile-nav" aria-label="Navegação principal">
+      <button class="${app.activeModuleId === 'dashboard' ? 'active' : ''}" data-module="dashboard"><span>▦</span><small>Início</small></button>
+      <button class="${app.activeModuleId === 'orders' ? 'active' : ''}" data-module="orders"><span>OS</span><small>OS</small></button>
+      <button class="${app.activeModuleId === 'pops' ? 'active' : ''}" data-module="pops"><span>POP</span><small>POPs</small></button>
+      <button class="${modules.some((module) => module.id === app.activeModuleId) ? 'active' : ''}" data-action="open-menu"><span>☰</span><small>Módulos</small></button>
+    </nav>
   `;
 }
 
